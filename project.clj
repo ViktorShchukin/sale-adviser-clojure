@@ -6,7 +6,8 @@
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [ring/ring-core "1.11.0-RC1"]
                  [ring/ring-jetty-adapter "1.11.0-RC1"]
-                 [compojure "1.7.0"]]
+                 [compojure "1.7.0"]
+                 [ch.qos.logback/logback-classic "1.4.11"]]
   :main ^:skip-aot sale-adviser-clojure.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all

@@ -2,24 +2,28 @@
   (:require [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
             [ring.adapter.jetty :as jetty]
-            [ring.util.response :refer [file-response]])
+            [ring.util.response :refer [resource-response]]
+            [ring.middleware.resource :refer [wrap-resource]]
+            [ring.middleware.content-type :refer [wrap-content-type]])
   (:gen-class))
 
 (defroutes app-routes
-           (GET "/" [] "Hello, World!")
-           (route/not-found "Not Found"))
-
-(defn handler [request]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body "Hello World"})
-
-(defn handler2 [request]
-  (file-response "index1.html" {:root "static"}))
+           (GET "/" [] (assoc-in (resource-response "index1.html" {:root "public"}) [:headers "Content-Type"] "text/html"))
+           (GET "/search-product" [] (assoc-in (resource-response "index1.html" {:root "public"}) [:headers "Content-Type"] "text/html"))
+           (route/not-found "Not Found")
+           )
+(defn hendler [request]
+  (assoc-in (resource-response "index1.html" {:root "public"}) [:headers "Content-Type"] "text/html"))
+(def app
+  (-> app-routes
+      (wrap-resource "public")
+      (wrap-content-type)))
 
 
 
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (jetty/run-jetty handler2  {:port 3000 :join? false}))
+  (jetty/run-jetty app  {:port 3000 :join? false}))
+
+
