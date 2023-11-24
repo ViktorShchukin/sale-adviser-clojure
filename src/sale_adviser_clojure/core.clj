@@ -1,29 +1,19 @@
 (ns sale-adviser-clojure.core
-  (:require [compojure.core :refer [defroutes GET]]
-            [compojure.route :as route]
+  (:require
             [ring.adapter.jetty :as jetty]
-            [ring.util.response :refer [resource-response]]
-            [ring.middleware.resource :refer [wrap-resource]]
-            [ring.middleware.content-type :refer [wrap-content-type]])
+            [sale-adviser-clojure.handler :as handler]
+            [sale-adviser-clojure.config :as conf])
   (:gen-class))
-
-(defroutes app-routes
-           (GET "/" [] (assoc-in (resource-response "index1.html" {:root "public"}) [:headers "Content-Type"] "text/html"))
-           (GET "/search-product" [] (assoc-in (resource-response "index1.html" {:root "public"}) [:headers "Content-Type"] "text/html"))
-           (route/not-found "Not Found")
-           )
-(defn hendler [request]
-  (assoc-in (resource-response "index1.html" {:root "public"}) [:headers "Content-Type"] "text/html"))
-(def app
-  (-> app-routes
-      (wrap-resource "public")
-      (wrap-content-type)))
-
-
 
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (jetty/run-jetty app  {:port 3000 :join? false}))
+  (let [config (conf/read-config)]
+    (jetty/run-jetty handler/app {:port 3000 :join? false})))
 
+(comment
+  (def server (-main))
+  (.stop server)
+  (.start server)
+  )
 
