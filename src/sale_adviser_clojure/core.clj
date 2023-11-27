@@ -6,7 +6,7 @@
   (:gen-class))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  ""
   [& args]
   (let [config (conf/read-config)]
     (jetty/run-jetty handler/app {:port 3000 :join? false})))

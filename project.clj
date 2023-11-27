@@ -7,7 +7,17 @@
                  [ring/ring-core "1.11.0-RC1"]
                  [ring/ring-jetty-adapter "1.11.0-RC1"]
                  [compojure "1.7.0"]
-                 [ch.qos.logback/logback-classic "1.4.11"]]
+                 [ch.qos.logback/logback-classic "1.4.11"]
+                 [ring/ring-json "0.5.1"]
+                 [migratus "1.5.4"]
+                 [org.postgresql/postgresql "42.7.0"]]
+  :plugins [[migratus-lein "0.7.3"]]
+  :migratus {:store :database
+             :migration-dir "migrations"
+             :db {:dbtype "postgresql"
+                  :dbname "sale_adviser"
+                  :user "anorisno"
+                  :password "GYAGG"}}
   :main ^:skip-aot sale-adviser-clojure.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all

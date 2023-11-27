@@ -2,30 +2,28 @@
 
 
 (def test-product {:id 1
-              :name "first"
-              })
+                   :name "first"})
+
 ;todo implement logic inside func
 (defn get-all-product
   "get all product from db"
-  [& arg]
+  []
   (list test-product))
 
 (defn get-product-by-id
-  ""
-  [id & arg]
+  [id]
   (list test-product))
 
 (defn insert-product
   "if product ID is nil it will be created"
-  [id name & arg]
+  [request-body]
   (list test-product))
 
 (defn update-product
-  ""
-  [id & arg]
+  [id]
   (list test-product))
 
 (defn delete-product
-  ""
-  [id & arg]
+  [id]
   (list test-product))
+
