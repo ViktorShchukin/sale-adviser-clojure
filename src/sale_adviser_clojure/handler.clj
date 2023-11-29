@@ -5,7 +5,7 @@
     [ring.util.response :refer [resource-response response]]
     [ring.middleware.resource :refer [wrap-resource]]
     [ring.middleware.content-type :refer [wrap-content-type]]
-    [ring.middleware.json :refer [wrap-json-response]]
+    [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
     [sale-adviser-clojure.product :as product]
     [sale-adviser-clojure.sale :as sale]
     [sale-adviser-clojure.prediction :as prediction]))
@@ -22,23 +22,22 @@
 
            ;;routes to access product entity
            (GET "/dictionary/product" [] (response (product/get-all-product)))
-           (GET "/dictionary/product/:productId" [productId] (product/get-product-by-id productId))
-           ;todo unpack request and get body
-           (POST "/dictionary/product" request (product/insert-product request))
-           (PUT "/dictionary/product/:productId" [productId] (product/update-product productId))
-           (DELETE "/dictionary/product/:productId" [productId] (product/delete-product productId))
+           (GET "/dictionary/product/:productId" [productId] (response (product/get-product-by-id productId)))
+           (POST "/dictionary/product" [:as {body :body}] (response (product/insert-product body)))
+           (PUT "/dictionary/product/:productId" [productId :as {body :body}] (response (product/update-product productId body)))
+           (DELETE "/dictionary/product/:productId" [productId] (response (product/delete-product productId)))
 
            ;;routes to access sale entity
-           (GET "/dictionary/product/:productId/sale" [productId] (sale/get-all-sale-by-productId productId))
-           (GET "/dictionary/product/:productId/sale/:saleId" [productId saleId] (sale/get-sale-by-id saleId))
+           (GET "/dictionary/product/:productId/sale" [productId] (response (sale/get-all-sale-by-productId productId)))
+           (GET "/dictionary/product/:productId/sale/:saleId" [productId saleId] (response (sale/get-sale-by-id saleId)))
            ;todo unpack request and get body
-           (POST "/dictionary/product/:productId/sale" request (sale/insert-sale request))
-           (PUT "/dictionary/product/:productId/sale/:saleId" [productId saleId] (sale/update-sale saleId))
-           (DELETE "/dictionary/product/:productId/sale/:saleId" [productId saleId] (sale/delete-sale saleId))
+           (POST "/dictionary/product/:productId/sale" [productId :as {body :body}] (response (sale/insert-sale productId body)))
+           (PUT "/dictionary/product/:productId/sale/:saleId" [productId saleId :as {body :body}] (response (sale/update-sale saleId body)))
+           (DELETE "/dictionary/product/:productId/sale/:saleId" [productId saleId] (response (sale/delete-sale saleId)))
 
            ;;routes to access prediction
            ;range - It's count of mounts in which period we need to do prediction
-           (GET "/dictionary/product/:productId/prediction/:range" [productId range] (prediction/get-prediction productId range))
+           (GET "/dictionary/product/:productId/prediction/:range" [productId range] (response (prediction/get-prediction productId range)))
 
            ;;the last route if other didn't match
            (route/not-found (get-index))
@@ -48,4 +47,5 @@
   (-> app-routes
       (wrap-resource "public")
       (wrap-content-type)
-      (wrap-json-response)))
+      (wrap-json-response)
+      (wrap-json-body {:keywords? true})))

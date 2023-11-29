@@ -1,29 +1,51 @@
-(ns sale-adviser-clojure.product)
+(ns sale-adviser-clojure.product
+  (:require
+    [next.jdbc :as jdbc]
+    [next.jdbc.result-set :as rs]))
 
 
-(def test-product {:id 1
-                   :name "first"})
+;;todo maybe I should get db-spec from config?
+;;todo get user and password from environment variables
+(def db-spec {:dbtype "postgresql"
+              :dbname "sale_adviser"
+              :user "anorisno"
+              :password "GYAGG"})
+
+(def ds (jdbc/get-datasource db-spec))
+
+(def ds-opts (jdbc/with-options ds {:builder-fn rs/as-unqualified-lower-maps}))
+
+;;(jdbc/execute! ds ["select * from product"])
 
 ;todo implement logic inside func
 (defn get-all-product
   "get all product from db"
   []
-  (list test-product))
+  (jdbc/execute! ds-opts ["select * from product"]))
 
 (defn get-product-by-id
   [id]
-  (list test-product))
+  (let [stm "select * from product where id=?"
+        uuid (parse-uuid id)]
+    (jdbc/execute! ds-opts [stm uuid])))
 
+;;todo if product id is nil it need to be created and be passed in statement
 (defn insert-product
   "if product ID is nil it will be created"
-  [request-body]
-  (list test-product))
+  [{:keys [id name]}]
+  (let [stm "insert into product(id, name) values (?,?)"
+        uuid (parse-uuid id)]
+    (jdbc/execute! ds-opts [stm uuid name])))
 
 (defn update-product
-  [id]
-  (list test-product))
+  [id {:keys [name]}]
+  (let [stm "update product set name=? where id=?"
+        uuid (parse-uuid id)]
+    (jdbc/execute! ds-opts [stm name uuid])))
 
 (defn delete-product
   [id]
-  (list test-product))
+  (let [stm "delete from product where id=?"
+        uuid (parse-uuid id)]
+    (jdbc/execute! ds-opts [stm uuid])))
 

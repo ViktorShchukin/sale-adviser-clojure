@@ -10,7 +10,9 @@
                  [ch.qos.logback/logback-classic "1.4.11"]
                  [ring/ring-json "0.5.1"]
                  [migratus "1.5.4"]
-                 [org.postgresql/postgresql "42.7.0"]]
+                 [org.postgresql/postgresql "42.7.0"]
+                 [com.github.seancorfield/next.jdbc "1.3.894"]
+                 ]
   :plugins [[migratus-lein "0.7.3"]]
   :migratus {:store :database
              :migration-dir "migrations"
