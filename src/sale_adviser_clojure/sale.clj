@@ -1,7 +1,8 @@
 (ns sale-adviser-clojure.sale
   (:require
     [next.jdbc :as jdbc]
-    [next.jdbc.result-set :as rs]))
+    [next.jdbc.result-set :as rs]
+    [java-time.api :as jt]))
 
 (def db-spec {:dbtype "postgresql"
               :dbname "sale_adviser"
@@ -36,18 +37,21 @@
   [productId {:keys [id product_id quantity total_sum date] }]
   (let [stm "insert into sale(id, product_id, quantity, total_sum, date) values(?, ?, ?, ?, ?)"
         uuid (parse-uuid id)
-        product_uuid (parse-uuid productId)]
-    (jdbc/execute! ds-opts [stm uuid product_uuid quantity total_sum date])))
+        product_uuid (parse-uuid product_id)
+        pars_date (jt/local-date-time (jt/formatter "yyyy-MM-dd'T'HH:mm:ss'Z'") date)]
+    (jdbc/execute! ds-opts [stm uuid product_uuid quantity total_sum pars_date])))
 
 (defn update-sale
   [id {:keys [product_id quantity total_sum date]}]
   (let [stm "update sale set product_id=?, quantity=?, total_sum=?, date=? where id=?"
         uuid (parse-uuid id)
-        product_uuid (parse-uuid product_id)]
-    (jdbc/execute! ds-opts [stm product_uuid quantity total_sum date uuid])))
+        product_uuid (parse-uuid product_id)
+        pars_date (jt/local-date-time date)]
+    (jdbc/execute! ds-opts [stm product_uuid quantity total_sum pars_date uuid])))
 
 (defn delete-sale
   [id]
   (let [stm "delete from sale where id=?"
         uuid (parse-uuid id)]
     (jdbc/execute! ds-opts [stm uuid])))
+
