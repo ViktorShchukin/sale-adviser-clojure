@@ -6,8 +6,8 @@
     [ring.middleware.resource :refer [wrap-resource]]
     [ring.middleware.content-type :refer [wrap-content-type]]
     [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
-    [sale-adviser-clojure.product :as product]
-    [sale-adviser-clojure.sale :as sale]
+    [sale-adviser-clojure.database.product :as product]
+    [sale-adviser-clojure.database.sale :as sale]
     [sale-adviser-clojure.prediction :as prediction]))
 
 (defn get-index

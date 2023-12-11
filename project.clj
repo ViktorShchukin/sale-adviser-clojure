@@ -13,6 +13,7 @@
                  [org.postgresql/postgresql "42.7.0"]
                  [com.github.seancorfield/next.jdbc "1.3.894"]
                  [clojure.java-time "1.4.2"]
+                 [org.clojure/data.csv "1.0.1"]
                  ]
   :plugins [[migratus-lein "0.7.3"]]
   :migratus {:store :database

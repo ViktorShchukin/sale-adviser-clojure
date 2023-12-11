@@ -3,7 +3,7 @@
     [clojure.string :as str]
     [java-time.api :as jt]))
 
-(defrecord Sale
+(defrecord Sale-prob
   [product-name date quantity price])
 
 (defn parse-string-sale
