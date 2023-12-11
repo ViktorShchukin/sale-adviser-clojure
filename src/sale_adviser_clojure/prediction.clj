@@ -2,6 +2,9 @@
   (:require
     [sale-adviser-clojure.sale :as sale]))
 
+(defrecord prediction
+  [product-id value range])
+
 (def test-prediction {:productId 1
                       :value 4
                       :range 7})

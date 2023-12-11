@@ -35,7 +35,9 @@
   "if product ID is nil it will be created"
   [{:keys [id name]}]
   (let [stm "insert into product(id, name) values (?,?)"
-        uuid (parse-uuid id)]
+        uuid (case id
+               nil (random-uuid)
+               (parse-uuid id))]
     (jdbc/execute! ds-opts [stm uuid name])))
 
 (defn update-product
@@ -49,3 +51,23 @@
   (let [stm "delete from product where id=?"
         uuid (parse-uuid id)]
     (jdbc/execute! ds-opts [stm uuid])))
+
+
+;;todo maybe should return Product object instead of :id
+(defn get-id-by-name
+  "return nil or :id ^String"
+  [name]
+  (let [stm "select id from product where name=?"
+        db-response (jdbc/execute-one! ds-opts [stm name])]
+    (case db-response
+      nil nil
+      (db-response :id))))
+
+
+(defn get-id-by-name-or-insert
+  [name]
+  (let [get-response (get-id-by-name name)]
+    (case get-response
+      nil (insert-product {:name name})
+      ;todo can't cast #uuid"a48b2fdb-8308-469b-9456-b007d4755bfd" to uuid. Need to refuse prefix #uuid
+      (get-product-by-id get-response))))
