@@ -3,8 +3,7 @@
     [next.jdbc :as jdbc]
     [next.jdbc.result-set :as rs]))
 
-
-;;todo create a new namespace which will handle the db access. files like "sale" or "product" should handle the model of app
+;;todo need to handle Exceptions from jdbc/execute
 ;;todo maybe I should get db-spec from config?
 ;;todo get user and password from environment variables
 (def db-spec {:dbtype "postgresql"
@@ -24,11 +23,14 @@
   []
   (jdbc/execute! ds-opts ["select * from product"]))
 
+
+
 (defn get-product-by-id
   [id]
   (let [stm "select * from product where id=?"
-        uuid (parse-uuid id)]
-    (jdbc/execute! ds-opts [stm uuid])))
+        ;uuid (parse-uuid id)
+        ]
+    (jdbc/execute! ds-opts [stm id])))
 
 ;;todo if product id is nil it need to be created and be passed in statement
 (defn insert-product
@@ -37,37 +39,36 @@
   (let [stm "insert into product(id, name) values (?,?)"
         uuid (case id
                nil (random-uuid)
-               (parse-uuid id))]
+               id)]
     (jdbc/execute! ds-opts [stm uuid name])))
 
 (defn update-product
   [id {:keys [name]}]
-  (let [stm "update product set name=? where id=?"
-        uuid (parse-uuid id)]
-    (jdbc/execute! ds-opts [stm name uuid])))
+  (let [stm "update product set name=? where id=?"]
+    (jdbc/execute! ds-opts [stm name id])))
 
 (defn delete-product
   [id]
-  (let [stm "delete from product where id=?"
-        uuid (parse-uuid id)]
-    (jdbc/execute! ds-opts [stm uuid])))
+  (let [stm "delete from product where id=?"]
+    (jdbc/execute! ds-opts [stm id])))
 
 
 ;;todo maybe should return Product object instead of :id
 (defn get-id-by-name
-  "return nil or :id ^String"
+  "return nil or ^String"
   [name]
   (let [stm "select id from product where name=?"
-        db-response (jdbc/execute-one! ds-opts [stm name])]
-    (case db-response
+        response (jdbc/execute-one! ds-opts [stm name])]
+    (case response
       nil nil
-      (db-response :id))))
+      (response :id))))
 
 
 (defn get-id-by-name-or-insert
   [name]
-  (let [get-response (get-id-by-name name)]
-    (case get-response
-      nil (insert-product {:name name})
-      ;todo can't cast #uuid"a48b2fdb-8308-469b-9456-b007d4755bfd" to uuid. Need to refuse prefix #uuid
-      (get-product-by-id get-response))))
+  (let [response (get-id-by-name name)]
+    (case response
+      ;;todo strange construction. Maybe jdbc can return what he insert
+      ;;todo need to handle Exceptions from jdbc
+      nil (let [res (insert-product {:name name})] (get-id-by-name name))
+      response)))

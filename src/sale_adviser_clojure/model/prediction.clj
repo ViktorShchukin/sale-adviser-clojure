@@ -1,6 +1,6 @@
-(ns sale-adviser-clojure.prediction
+(ns sale-adviser-clojure.model.prediction
   (:require
-    [sale-adviser-clojure.sale :as sale]))
+    [sale-adviser-clojure.database.sale :as sale]))
 
 (defrecord prediction
   [product-id value range])
