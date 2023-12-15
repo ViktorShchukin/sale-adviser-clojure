@@ -70,5 +70,5 @@
     (case response
       ;;todo strange construction. Maybe jdbc can return what he insert
       ;;todo need to handle Exceptions from jdbc
-      nil (let [res (insert-product {:name name})] (get-id-by-name name))
+      nil (do (insert-product {:name name}) (get-id-by-name name))
       response)))

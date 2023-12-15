@@ -3,6 +3,7 @@
     (java.time LocalDateTime)
     (java.util UUID)))
 
+;;todo maybe use zoned datetime?
 (defrecord Sale
   [^UUID id
    ^UUID product-id
