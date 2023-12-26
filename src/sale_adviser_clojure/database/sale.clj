@@ -15,7 +15,7 @@
 
 (def ds (jdbc/get-datasource db-spec))
 
-(def ds-opts (jdbc/with-options ds {:builder-fn rs/as-unqualified-lower-maps}))
+(def ds-opts (jdbc/with-options ds {:builder-fn rs/as-unqualified-kebab-maps}))
 (def test-sale {:id 1
                 :product_id 2
                 :quantity 3
