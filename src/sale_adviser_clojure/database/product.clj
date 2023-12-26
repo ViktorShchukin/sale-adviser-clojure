@@ -68,7 +68,7 @@
   [name]
   (let [response (get-id-by-name name)]
     (case response
-      ;;todo strange construction. Maybe jdbc can return what he insert
+      ;;todo strange construction. Maybe jdbc can return what he inserts
       ;;todo need to handle Exceptions from jdbc
       nil (do (insert-product {:name name}) (get-id-by-name name))
       response)))

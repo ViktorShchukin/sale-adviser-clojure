@@ -26,8 +26,9 @@
   "get all sale by productId from db"
   [productId]
   (let [stm "select * from sale where product_id=?"
-        product_uuid (parse-uuid productId)]
-    (jdbc/execute! ds-opts [stm product_uuid])))
+        ;product_uuid (parse-uuid productId)
+        ]
+    (jdbc/execute! ds-opts [stm productId])))
 
 (defn get-sale-by-id
   [id]
@@ -38,12 +39,16 @@
 ;;todo if sale id is nil it need to be created and be passed in statement
 (defn insert-sale
   "if sale ID is nil it will be created"
-  [productId {:keys [id product_id quantity total_sum date] }]
-  (let [stm "insert into sale(id, product_id, quantity, total_sum, date) values(?, ?, ?, ?, ?)"
-        uuid (parse-uuid id)
-        product_uuid (parse-uuid product_id)
-        pars_date (jt/local-date-time (jt/formatter "yyyy-MM-dd'T'HH:mm:ss'Z'") date)]
-    (jdbc/execute! ds-opts [stm uuid product_uuid quantity total_sum pars_date])))
+  [{:keys [id product-id quantity total-sum date] }]
+  (let [stm "insert into sale(id, product_id, quantity, total_sum, sale_date) values(?, ?, ?, ?, ?)"
+        uuid (case id
+               nil (random-uuid)
+               id)]
+    (try
+       (jdbc/execute! ds-opts [stm uuid product-id quantity total-sum date])
+       (catch Exception e
+         ;;todo put message about exception into log
+         nil))))
 
 (defn update-sale
   [id {:keys [product_id quantity total_sum date]}]

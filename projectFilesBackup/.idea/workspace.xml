@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="239e3aae-7fbe-4279-9781-7dc4d30067fe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sale_adviser_clojure/decoder/string.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sale_adviser_clojure/decoder/datetime.clj" beforeDir="false" afterPath="$PROJECT_DIR$/src/sale_adviser_clojure/decoder/datetime.clj" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Clojure Namespace" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/ring/ring-jetty-adapter/1.11.0-RC1/ring-jetty-adapter-1.11.0-RC1.jar!/ring/adapter/jetty.clj" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2YCsanNE6h7bD1CszLHrz5Jo8Mj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cursive.last.file.extension./home/anorisno/work/git-hub-projects/sale-adviser-clojure/src&quot;: &quot;clj&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/anorisno/work/git-hub-projects/logseq&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/sale_adviser_clojure/model" />
+      <recent name="$PROJECT_DIR$/resources/public" />
+      <recent name="$PROJECT_DIR$/resources" />
+    </key>
+  </component>
+  <component name="ReplState" timestamp="1702645644782">{:repl-history {:ide [], :local [{:command &quot;(jetty/run-jetty handler {:port 3000 :join? false})&quot;, :offset 51, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(defn handler [request]\n  {:status 200\n   :headers {\&quot;Content-Type\&quot; \&quot;text/html\&quot;}\n   :body \&quot;Hello World\&quot;})&quot;, :offset 104, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(jetty/run-jetty handler {:port 3000})&quot;, :offset 38, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(jetty/run-jetty handler {:port 3001})&quot;, :offset 38, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(defn -main\n  \&quot;I don't do a whole lot ... yet.\&quot;\n  [&amp; args]\n  (jetty/run-jetty app  {:port 3000 :join? false}))&quot;, :offset 110, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(defn handler2 [request]\n  (assoc-in (resource-response \&quot;index1.html\&quot; {:root \&quot;public\&quot;}) [:headers \&quot;Content-Type\&quot;] \&quot;text/html\&quot;))&quot;, :offset 127, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(+ 2 2)&quot;, :offset 7, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(defn read-config\n  \&quot;return a config map from resources/config.edn\&quot;\n  [&amp; args]\n  (edn/read-string (slurp (io/resource \&quot;config.end\&quot;))))&quot;, :offset 134, :ns &quot;sale-adviser-clojure.config&quot;} {:command &quot;(:use sale_adviser_clojure.config)&quot;, :offset 34, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(:use '[sale_adviser_clojure.config])&quot;, :offset 37, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(read-config)&quot;, :offset 13, :ns &quot;sale-adviser-clojure.config&quot;} {:command &quot;(edn/read-string (slurp (io/resource \&quot;config.end\&quot;)))&quot;, :offset 52, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(defn read-config\n  \&quot;return a config map from resources/config.edn\&quot;\n  [&amp; args]\n  (edn/read-string (slurp (io/resource \&quot;config.edn\&quot;))))&quot;, :offset 134, :ns &quot;sale-adviser-clojure.config&quot;} {:command &quot;(sale-adviser-clojure.config/read-config)&quot;, :offset 41, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(-main)&quot;, :offset 7, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(start-server)&quot;, :offset 14, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(.start server)&quot;, :offset 15, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(defn get-product-by-id\n  [id]\n  (let [stm \&quot;select * from product where id=?\&quot;\n        uuid (parse-uuid id)]\n    (jdbc/execute! ds [stm uuid])))&quot;, :offset 143, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.product/get-product-by-id \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot;)&quot;, :offset 87, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.product/get-all-product)&quot;, :offset 46, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(parse-uuid \&quot;58159cb9-53e6-44e0-8ea4-2c85908168ss\&quot;)&quot;, :offset 51, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(parse-uuid \&quot;58159cb9-53e6-44e0-8ea4-2c85908168cc\&quot;)&quot;, :offset 51, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.prediction/get-prediction \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot; 3)&quot;, :offset 89, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(get (sale/get-all-sale-by-productId \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot;) 0)&quot;, :offset 79, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(-&gt; (sale/get-all-sale-by-productId \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot;)\n    (get 0)\n    (get :quantity))&quot;, :offset 108, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(-&gt; (sale/get-all-sale-by-productId \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot;)\n    (get 0)\n    (get :date))&quot;, :offset 104, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(-&gt; (sale/get-all-sale-by-productId \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot;)\n    (get 0)\n    (get :date)\n    (java-time.api/local-date-time))&quot;, :offset 140, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.data-parser/parse-string-sale \&quot;\\\&quot;Дезинфицирующее средство \\\&quot;\\\&quot;Aqualeon\\\&quot;\\\&quot; жидкое 30л с дыш.кр\\\&quot;;11.01.2022 10:54:27;4.000;1,287.00\&quot; #\&quot;;\&quot;)&quot;, :offset 160, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.decoder.sale/Sale. 1 2 3 4 5)&quot;, :offset 51, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(Sale. 1 2 3 4 5)&quot;, :offset 17, :ns &quot;sale-adviser-clojure.decoder.sale&quot;} {:command &quot;(:require [clojure.data.csv :as csv])&quot;, :offset 37, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(csv/read-csv \&quot;some,string\&quot;)&quot;, :offset 28, :ns &quot;sale-adviser-clojure.decoder.sale&quot;} {:command &quot;(csv/read-csv \&quot;some;string\&quot; {:separator \\;})&quot;, :offset 44, :ns &quot;sale-adviser-clojure.decoder.sale&quot;} {:command &quot;(csv/read-csv \&quot;some;string;sfasf\&quot; {:separator \\;})&quot;, :offset 50, :ns &quot;sale-adviser-clojure.decoder.sale&quot;} {:command &quot;(sale-adviser-clojure.decoder.sale/some-func \&quot;/data-file-example-sales.csv\&quot;)&quot;, :offset 76, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(Sale. [\&quot;Дезинфицирующее средство \\\&quot;Aqualeon\\\&quot; жидкое 30л с дыш.кр\&quot; \&quot;26.12.2022 12:57:52\&quot; \&quot;6.000\&quot; \&quot;1,680.00\&quot;])&quot;, :offset 110, :ns &quot;sale-adviser-clojure.decoder.sale&quot;} {:command &quot;(Sale. (some 0) (some 1) (some 2) (some 3) (some 0))&quot;, :offset 52, :ns &quot;sale-adviser-clojure.decoder.sale&quot;} {:command &quot;(sale-adviser-clojure.database.product/get-id-by-name-or-create \&quot;first\&quot;)&quot;, :offset 72, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(println \n  (sale-adviser-clojure.database.product/get-id-by-name-or-create \&quot;first\&quot;))&quot;, :offset 85, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(parse-uuid \n  (sale-adviser-clojure.database.product/get-id-by-name-or-create \&quot;first\&quot;))&quot;, :offset 88, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/get-id-by-name-or-create \&quot;some\&quot;)&quot;, :offset 71, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/get-id-by-name \&quot;some\&quot;)&quot;, :offset 61, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/insert-product {:id (random-uuid) :name \&quot;someName\&quot;})&quot;, :offset 91, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/insert-product {:id (str (random-uuid)) :name \&quot;someName\&quot;})&quot;, :offset 97, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/insert-product {:name \&quot;someName2\&quot;})&quot;, :offset 74, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.decoder.sale/some-func \&quot;data-file-example-sales.csv\&quot;)&quot;, :offset 75, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/get-id-by-name \&quot;first\&quot;)&quot;, :offset 62, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(type (sale-adviser-clojure.database.product/get-id-by-name \&quot;first\&quot;))&quot;, :offset 69, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(type (random-uuid))&quot;, :offset 20, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(random-uuid)&quot;, :offset 13, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(parse-uuid \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot;)&quot;, :offset 51, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(parse-uuid \&quot;a48b2fdb-8308-469b-9456-b007d4755bss\&quot;)&quot;, :offset 51, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(def server (-main))&quot;, :offset 20, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(.stop server)&quot;, :offset 14, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.decoder.uuid \&quot;some\&quot;)&quot;, :offset 42, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.decoder.uuid \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot;)&quot;, :offset 74, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.decoder.uuid/from-string \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot;)&quot;, :offset 86, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(source ex-info)&quot;, :offset 16, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;()&quot;, :offset 1} {:command &quot;(sale-adviser-clojure.decoder.uuid/from-string \&quot;some\&quot;)&quot;, :offset 54, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(.getMessage (sale-adviser-clojure.decoder.uuid/from-string \&quot;some\&quot;))&quot;, :offset 68, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(try\n    (sale-adviser-clojure.decoder.uuid/from-string \&quot;some\&quot;)\n    (catch clojure.lang.ExceptionInfo e\n      (.getMessage e)))&quot;, :offset 127, :ns &quot;sale-adviser-clojure.decoder.uuid&quot;} {:command &quot;(sale-adviser-clojure.decoder.uuid/from-string \&quot;a48b2fdb-8308-469b-9456-b007d4755bss\&quot;)&quot;, :offset 86, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(try\n    (sale-adviser-clojure.decoder.uuid/from-string \&quot;a48b2fdb-8308-469b-9456-b007d4755bss\&quot;)\n    (catch clojure.lang.ExceptionInfo e\n      (.getMessage e)))&quot;, :offset 159, :ns &quot;sale-adviser-clojure.decoder.uuid&quot;} {:command &quot;(sale-adviser-clojure.database.product/get-id-by-name-or-insert \&quot;a48b2fdb-8308-469b-9456-b007d4755bfd\&quot;)&quot;, :offset 103, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/get-id-by-name-or-insert \&quot;first\&quot;)&quot;, :offset 72, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/insert-product {:id \&quot;some\&quot; :name \&quot;some\&quot;})&quot;, :offset 80, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/insert-product {:id #uuid\&quot;a48b2fdb-8308-469b-9456-b007d4755bff\&quot; :name nil})&quot;, :offset 114, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/get-id-by-name-or-insert \&quot;third\&quot;)&quot;, :offset 72, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(sale-adviser-clojure.database.product/get-id-by-name-or-insert \&quot;third3\&quot;)&quot;, :offset 73, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(def some-string [\&quot;Дезинфицирующее средство \\\&quot;Aqualeon\\\&quot; жидкое 30л с дыш.кр\&quot; \&quot;26.12.2022 12:57:52\&quot; \&quot;6.000\&quot; \&quot;1,680.00\&quot;])&quot;, :offset 120, :ns &quot;sale-adviser-clojure.decoder.sale&quot;} {:command &quot;(Sale. (some-string 0) (some-string 1) (some-string 2) (some-string 3) (some-string 0))&quot;, :offset 87, :ns &quot;sale-adviser-clojure.decoder.sale&quot;} {:command &quot;(with-open [reader (clojure.java.io/reader \&quot;data-file-example-sales-short.csv\&quot;)] (doall (sale-adviser-clojure.decoder.sale/parse-csv reader)))&quot;, :offset 142, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(with-open [reader (clojure.java.io/reader \&quot;data-file-example-sales.csv\&quot;)] (doall (sale-adviser-clojure.decoder.sale/parse-csv reader)))&quot;, :offset 136, :ns &quot;sale-adviser-clojure.core&quot;} {:command &quot;(with-open [reader (clojure.java.io/reader \&quot;data-file-example-sales-normal.csv\&quot;)] (doall (sale-adviser-clojure.decoder.sale/parse-csv reader)))&quot;, :offset 143, :ns &quot;sale-adviser-clojure.core&quot;}], :remote []}}</component>
+  <component name="RunManager" selected="Clojure REPL.REPL for sale-adviser-clojure">
+    <configuration default="true" type="Babashka" factoryName="BabashkaLocalRepl" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="bbPath" value="" />
+      <setting name="parameters" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <setting name="workingDir" value="" />
+      <setting name="focusEditor" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="REPL for sale-adviser-clojure" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false" temporary="true">
+      <option name="configVersion" value="1" />
+      <option name="displayName" value="REPL for sale-adviser-clojure" />
+      <option name="execution" value="LEININGEN" />
+      <module name="sale-adviser-clojure" />
+      <option name="options" />
+      <option name="profiles" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <option name="configVersion" value="1" />
+      <option name="options" />
+      <option name="profiles" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <setting name="focusEditor" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sale-adviser-clojure.core" type="ClojureScriptRunConfiguration" factoryName="Clojure Script" temporary="true">
+      <option name="configVersion" value="1" />
+      <module name="sale-adviser-clojure" />
+      <option name="namespace" value="sale-adviser-clojure.core" />
+      <option name="options" />
+      <option name="profiles" />
+      <option name="type" value="NAMESPACE" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Clojure REPL.REPL for sale-adviser-clojure" />
+        <item itemvalue="Clojure Application.sale-adviser-clojure.core" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="239e3aae-7fbe-4279-9781-7dc4d30067fe" name="Changes" comment="" />
+      <created>1700040964906</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700040964906</updated>
+    </task>
+    <servers />
+  </component>
+</project>

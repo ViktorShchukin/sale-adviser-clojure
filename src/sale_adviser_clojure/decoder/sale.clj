@@ -25,23 +25,12 @@
   [coll]
   (Sale. (random-uuid) (product/get-id-by-name-or-insert (coll 0)) (coll 2) (* (coll 2) (coll 3)) (coll 1)))
 
+
+
+
 (defn from-csv
   [reader]
   (->> (csv/read-csv reader {:separator \;})
        (map validate-csv-row )
        (map convert-csv-row-to-Sale )
        ))
-
-;;todo delete this later
-(defn parse-csv-old
-  [file-name]
-  (lazy-seq (with-open [open-file (io/reader file-name)]
-    ;;todo check can we undo doall. Can it work?
-     (csv/read-csv open-file {:separator \;}))))
-
-;;todo delete this later
-;;todo Maybe use lazy-seq. How can i do
-(defn from-csv-old
-  ([file-name]
-   (let [sale-seq (parse-csv file-name)]
-     (lazy-seq ()))))

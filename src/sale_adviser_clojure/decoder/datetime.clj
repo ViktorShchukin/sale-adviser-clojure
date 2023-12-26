@@ -13,7 +13,7 @@
   ([^String s] (from-string s (jt/formatter "yyyy-MM-dd'T'HH:mm:ss'Z'")))
   ([^String s ^DateTimeFormatter formatter]
      (try
-      (java.time.LocalDateTime/parse s formatter)
+      (LocalDateTime/parse s formatter)
       (catch Exception e
         ;;todo finish this handler of error. Need to implement structure using the hash-map
         (-> (.getMessage e)
