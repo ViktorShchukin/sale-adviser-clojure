@@ -37,7 +37,7 @@
            ;;routes for file upload with sales data
            ;;todo need to return count of updated rows but now returns count of evalueted rows
            ;;todo need to return Int
-           (POST "/dictionary/sale/file/upload" [:as {params :params}] (response {:count-updated-row (str (count (upload-file (get params "file"))))}))
+           (POST "/dictionary/sale/file/upload" [:as {params :params}] (response {:count-updated-row (count (upload-file (get params "file")))}))
 
            ;;routes to access product entity
            (GET "/dictionary/product" [] (response (product/get-all-product)))

@@ -30,6 +30,13 @@
         ]
     (jdbc/execute! ds-opts [stm productId])))
 
+(defn get-all-sale-by-product-id-order-by-date
+  [product-id]
+  (let [stm "select * from sale where product_id=? order by sale_date"
+        ;product_uuid (parse-uuid productId)
+        ]
+    (jdbc/execute! ds-opts [stm product-id])))
+
 (defn get-sale-by-id
   [id]
   (let [stm "select * from sale where id=?"
