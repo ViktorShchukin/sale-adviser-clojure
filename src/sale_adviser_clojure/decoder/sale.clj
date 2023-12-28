@@ -34,3 +34,8 @@
        (map validate-csv-row )
        (map convert-csv-row-to-Sale )
        ))
+
+
+(defn from-jdbc-hash-map
+  [{:keys [id product-id quantity total-sum sale-date] :as sale}]
+  (Sale. id product-id quantity total-sum (decode-datetime/from-java.util.Date sale-date)))

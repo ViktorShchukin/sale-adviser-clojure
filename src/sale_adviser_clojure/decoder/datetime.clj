@@ -2,7 +2,8 @@
   (:require
     [java-time.api :as jt])
   (:import
-    (java.time LocalDateTime)
+    (java.util Date)
+    (java.time LocalDateTime ZoneId)
     (java.time.format DateTimeFormatter)))
 
 
@@ -20,3 +21,15 @@
             (str )
             (ex-info  {})
             (throw ))))))
+
+(defn from-java.util.Date
+  ^LocalDateTime
+  [^Date date]
+  (try
+    (LocalDateTime/ofInstant (.toInstant date) (ZoneId/of "UTC"))
+    (catch Exception e
+      ;;todo finish this handler of error. Need to implement structure using the hash-map
+      (-> (.getMessage e)
+          (str )
+          (ex-info  {})
+          (throw )))))

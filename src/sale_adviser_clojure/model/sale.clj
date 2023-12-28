@@ -9,6 +9,6 @@
    ^UUID product-id
    ^Integer quantity
    ^Integer total-sum
-   ^LocalDateTime date])
+   ^LocalDateTime sale-date])
 
 

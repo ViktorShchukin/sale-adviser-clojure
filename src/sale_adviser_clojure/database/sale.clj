@@ -2,7 +2,8 @@
   (:require
     [next.jdbc :as jdbc]
     [next.jdbc.result-set :as rs]
-    [java-time.api :as jt]))
+    [java-time.api :as jt]
+    [sale-adviser-clojure.decoder.sale :as decode-sale]))
 
 
 ;;todo create a new namespace which will handle the db access. files like "sale" or "product" should handle the model of app
@@ -30,12 +31,13 @@
         ]
     (jdbc/execute! ds-opts [stm productId])))
 
+;;todo need to decode results from other functions like here
 (defn get-all-sale-by-product-id-order-by-date
   [product-id]
   (let [stm "select * from sale where product_id=? order by sale_date"
         ;product_uuid (parse-uuid productId)
         ]
-    (jdbc/execute! ds-opts [stm product-id])))
+    (map decode-sale/from-jdbc-hash-map (jdbc/execute! ds-opts [stm product-id]))))
 
 (defn get-sale-by-id
   [id]

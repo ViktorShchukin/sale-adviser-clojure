@@ -18,10 +18,17 @@
 ;;(jdbc/execute! ds ["select * from product"])
 
 ;todo implement logic inside func
+
 (defn get-all-product
-  "get all product from db"
   []
   (jdbc/execute! ds-opts ["select * from product"]))
+
+(defn get-all-product-where-name-like
+  "get all product from db"
+  [product-name]
+  (let [stm "select * from product where name like ?"
+        name-like (str "%" product-name "%")]
+    (jdbc/execute! ds-opts [stm name-like])))
 
 
 

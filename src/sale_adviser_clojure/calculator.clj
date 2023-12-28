@@ -9,14 +9,20 @@
   [coll]
   (let [last-record (last coll)
         before-last-record (last (butlast coll))]
-    (/ (- (before-last-record :quantity) (last-record :quantity)) (- (.getTime (before-last-record :sale-date)) (.getTime (last-record :sale-date))))))
+    (/ (- (:quantity before-last-record) ( :quantity last-record)) (- (.toEpochSecond  (:sale-date before-last-record) (java.time.ZoneOffset/UTC)) (.toEpochSecond (:sale-date last-record) (java.time.ZoneOffset/UTC))))))
     ;(- (before-last-record :quantity) (last-record :quantity))(/  (- (before-last-record :date) (last-record :date)))))
 
 (defn calculate-prediction
   [product-id prediction-date]
   (let [sales (sale/get-all-sale-by-product-id-order-by-date product-id)]
-    (+ ((last sales) :quantity) (* (derivative-of-last-two sales) (- (.getTime prediction-date) (.getTime ((last sales) :sale-date)))))))
+    (+
+      (:quantity (last sales))
+      (*
+        (derivative-of-last-two sales)
+        (-
+          (.toEpochSecond prediction-date (java.time.ZoneOffset/UTC))
+          (.toEpochSecond (:sale-date (last sales)) (java.time.ZoneOffset/UTC)))))))
 
 (defn get-prediction
   [product-id prediction-date]
-  (Prediction. product-id (calculate-prediction product-id prediction-date) prediction-date))
+  (Prediction. product-id (int (calculate-prediction product-id prediction-date)) (.toString prediction-date)))
