@@ -37,6 +37,7 @@
            ;;routs for front app. It's spa here. Just need to serve index to all app routs
            (GET "/" [] (get-index))
            (GET "/search-product" [] (get-index))
+           (GET "/groups" [] (get-index))
 
            ;;routes for file upload with sales data
            ;;todo need to return count of updated rows but now returns count of evalueted rows
