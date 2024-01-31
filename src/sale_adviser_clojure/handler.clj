@@ -12,6 +12,7 @@
     [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
     [sale-adviser-clojure.database.product :as product]
     [sale-adviser-clojure.database.sale :as sale]
+    [sale-adviser-clojure.database.product-group :as product-group]
     [sale-adviser-clojure.model.prediction :as prediction]
     [sale-adviser-clojure.decoder.uuid :as id-decoder]
     [sale-adviser-clojure.decoder.sale :as decode-sale]
@@ -62,6 +63,21 @@
            ;range - It's count of mounts in which period we need to do prediction
            (GET "/dictionary/product/:productId/prediction/:date" [productId date] (response (calculator/get-prediction (id-decoder/from-string productId) (decode-date/from-string date (jt/formatter "yyyy-MM-dd'T'HH:mm:ss")))))
 
+           ;;routes to manage the product groups
+           (GET "/dictionary/group" [] (response (product-group/get-all-groups-of-product)))
+           (GET "/dictionary/group/:group-id" [group-id] (response (product-group/get-group-of-product-by-id (id-decoder/from-string group-id))))
+           (POST "/dictionary/group" [:as {body :body}] (response (product-group/create-new-group-of-product body)))
+           (PUT "/dictionary/group/:group-id" [group-id  :as {body :body}] (response (product-group/update-group-of-product (id-decoder/from-string group-id) body)))
+           (DELETE "/dictionary/group/:group-id" [group-id] (response (product-group/delete-group-of-product-by-id (id-decoder/from-string group-id))))
+
+           ;;routes to manage products in product groups
+           (GET "/dictionary/group/:group-id/product" [group-id] (response (product-group/get-all-product-of-group-by-group-id (id-decoder/from-string group-id))))
+           (GET "/dictionary/group/:group-id/product/:product-id" [group-id product-id] (response (product-group/get-product-by-group-id-product-id (id-decoder/from-string group-id) (id-decoder/from-string product-id))))
+           (POST "/dictionary/group/:group-id/product/:product-id" [group-id product-id :as {body :body}] (response (product-group/insert-product-in-group  (id-decoder/from-string group-id) (id-decoder/from-string product-id))))
+           ;;todo PUT need to be not implemented and return code response about it
+           (PUT "/dictionary/group/:group-id/product/:product-id" [group-id  :as {body :body}] {})
+           (DELETE "/dictionary/group/:group-id/product/:product-id" [group-id product-id] (response (product-group/delete-product-from-group (id-decoder/from-string group-id) (id-decoder/from-string product-id))))
+
            ;;the last route if other didn't match
            (route/not-found (get-index))
            )
@@ -90,39 +106,4 @@
       (wrap-multipart-params)
       (wrap-params)
       ))
-(comment '(def some-map "{:ssl-client-cert nil,
- :protocol HTTP/1.1,
- :remote-addr 127.0.0.1,
- :params {},
- :route-params {},
- :headers {accept */*, user-agent insomnia/2023.5.8, host localhost:3000},
- :server-port 3000,
- :content-length nil,
- :compojure/route [:get /dictionary/product],
- :content-type nil, :character-encoding nil,
- :uri /dictionary/product,
- :server-name localhost,
- :query-string product_name=%D1%85%D0%BB%D0%BE%D1%80,
- :body #object[org.eclipse.jetty.server.HttpInput 0x50f4ded0 HttpInput@1358225104 cs=HttpChannelState@49e07384{s=HANDLING rs=BLOCKING os=OPEN is=IDLE awp=false se=false i=true al=0} cp=org.eclipse.jetty.server.BlockingContentProducer@61571456 eof=false],
- :multipart-params {},
- :scheme :http,
- :request-method :get}
 
-
- {:ssl-client-cert nil,
- :protocol HTTP/1.1,
- :remote-addr 127.0.0.1,
- :params {},
- :route-params {},
- :headers {accept */*, user-agent insomnia/2023.5.8, host localhost:3000},
- :server-port 3000, :content-length nil,
- :compojure/route [:get /dictionary/product],
- :content-type nil,
- :character-encoding nil,
- :uri /dictionary/product,
- :server-name localhost,
- :query-string product_name=Aqual,
- :body #object[org.eclipse.jetty.server.HttpInput 0x50f4ded0 HttpInput@1358225104 cs=HttpChannelState@49e07384{s=HANDLING rs=BLOCKING os=OPEN is=IDLE awp=false se=false i=true al=0} cp=org.eclipse.jetty.server.BlockingContentProducer@61571456 eof=false],
- :multipart-params {},
- :scheme :http,
- :request-method :get}"))
