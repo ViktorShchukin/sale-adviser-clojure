@@ -64,7 +64,7 @@
 
 (defn get-all-product-of-group-by-group-id
   [group-id]
-  (let [stm "select * from product_and_groups where group_id=?"]
+  (let [stm "select p.* from product p join product_and_groups pg on p.id=pg.product_id where pg.group_id = ?"]
     (jdbc/execute! ds-opts [stm group-id])))
 
 (defn get-product-by-group-id-product-id
