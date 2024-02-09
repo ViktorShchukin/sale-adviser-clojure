@@ -1,0 +1,1 @@
+ALTER TABLE product_and_groups ADD COLUMN custom_value INTEGER;
