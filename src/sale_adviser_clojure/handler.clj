@@ -38,6 +38,7 @@
            (GET "/" [] (get-index))
            (GET "/search-product" [] (get-index))
            (GET "/groups" [] (get-index))
+           (GET "/groups/:group-id" [] (get-index))
 
            ;;routes for file upload with sales data
            ;;todo need to return count of updated rows but now returns count of evalueted rows
@@ -78,6 +79,10 @@
            ;;todo PUT need to be not implemented and return code response about it
            (PUT "/dictionary/group/:group-id/product/:product-id" [group-id  :as {body :body}] {})
            (DELETE "/dictionary/group/:group-id/product/:product-id" [group-id product-id] (response (product-group/delete-product-from-group (id-decoder/from-string group-id) (id-decoder/from-string product-id))))
+
+           ;;routes to manage custom value
+           (GET "/dictionary/group/:group-id/product/:product-id/custom-value" [group-id product-id] (response (product-group/get-custom-value (id-decoder/from-string group-id) (id-decoder/from-string product-id))))
+           (PUT "/dictionary/group/:group-id/product/:product-id/custom-value" [group-id product-id :as {body :body}] (response (product-group/update-custom-value (id-decoder/from-string group-id) (id-decoder/from-string product-id) body)))
 
            ;;the last route if other didn't match
            (route/not-found (get-index))

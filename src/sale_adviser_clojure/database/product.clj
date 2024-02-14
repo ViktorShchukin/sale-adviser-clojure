@@ -13,7 +13,7 @@
 
 (def ds (jdbc/get-datasource db-spec))
 
-(def ds-opts (jdbc/with-options ds {:builder-fn rs/as-unqualified-lower-maps}))
+(def ds-opts (jdbc/with-options ds {:builder-fn rs/as-unqualified-kebab-maps}))
 
 ;;(jdbc/execute! ds ["select * from product"])
 

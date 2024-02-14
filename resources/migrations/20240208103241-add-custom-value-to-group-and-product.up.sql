@@ -1,1 +1,1 @@
-ALTER TABLE product_and_groups ADD COLUMN custom_value INTEGER;
+ALTER TABLE product_and_groups ADD COLUMN custom_value INTEGER NOT NULL DEFAULT 0;

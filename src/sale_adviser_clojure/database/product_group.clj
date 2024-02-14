@@ -16,7 +16,7 @@
 
 (def ds (jdbc/get-datasource db-spec))
 
-(def ds-opts (jdbc/with-options ds {:builder-fn rs/as-unqualified-lower-maps}))
+(def ds-opts (jdbc/with-options ds {:builder-fn rs/as-unqualified-kebab-maps}))
 
 (defn get-all-groups-of-product
   []
@@ -81,24 +81,16 @@
   [group-id product-id]
   (let [stm "delete from product_and_groups where group_id=? and product_id=?"]
     (jdbc/execute! ds-opts [stm group-id product-id])))
-(comment
-  ;;todo maybe should return Product object instead of :id
-(defn get-id-by-name
-  "return nil or ^String"
-  [name]
-  (let [stm "select id from product where name=?"
-        response (jdbc/execute-one! ds-opts [stm name])]
-    (case response
-      nil nil
-      (response :id))))
 
 
-(defn get-id-by-name-or-insert
-  [name]
-  (let [response (get-id-by-name name)]
-    (case response
-      ;;todo strange construction. Maybe jdbc can return what he inserts
-      ;;todo need to handle Exceptions from jdbc
-      nil (do (insert-product {:name name}) (get-id-by-name name))
-      response)))
-)
+(defn get-custom-value
+  [group-id product-id]
+  (let [stm "select * from product_and_groups where group_id=? and product_id=?"]
+    (jdbc/execute-one! ds-opts [stm group-id product-id])))
+
+
+(defn update-custom-value
+  [group-id product-id {:keys [custom-value]}]
+  (let [stm "update product_and_groups set custom_value=? where group_id=? and product_id=?"]
+    (jdbc/execute-one! ds-opts [stm custom-value group-id product-id])))
+
