@@ -63,7 +63,7 @@
 
            ;;routes to access prediction
            ;range - It's count of mounts in which period we need to do prediction
-           (GET "/dictionary/product/:productId/prediction/:date" [productId date] (response (calculator/get-prediction (id-decoder/from-string productId) (decode-date/from-string date (jt/formatter "yyyy-MM-dd'T'HH:mm:ss")))))
+           (GET "/dictionary/product/:productId/prediction/:date" [productId date] (response (calculator/get-prediction (id-decoder/from-string productId) (decode-date/from-string date (jt/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")))))
 
            ;;routes to manage the product groups
            (GET "/dictionary/group" [] (response (product-group/get-all-groups-of-product)))
