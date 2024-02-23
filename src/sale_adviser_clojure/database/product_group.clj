@@ -37,7 +37,7 @@
   (let [stm "select * from product_groups where id=?"
         ;uuid (parse-uuid id)
         ]
-    (jdbc/execute! ds-opts [stm id])))
+    (jdbc/execute-one! ds-opts [stm id])))
 
 ;;todo if product id is nil it need to be created and be passed in statement
 ;;todo in databese.product wrong func. It can't work becouse it not validate id
@@ -93,4 +93,13 @@
   [group-id product-id {:keys [custom-value]}]
   (let [stm "update product_and_groups set custom_value=? where group_id=? and product_id=?"]
     (jdbc/execute-one! ds-opts [stm custom-value group-id product-id])))
+
+(defn get-products-and-custom-value-by-group-id
+  [group-id]
+  (let [stm "select pag.product_id, p.name , pag.custom_value
+                from product_and_groups pag join product p ON pag.product_id = p.id
+                                            join product_groups pg on pag.group_id = pg.id
+                where pag.group_id = ?;"]
+    (jdbc/execute! ds-opts [stm group-id])))
+
 

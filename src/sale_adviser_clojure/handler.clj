@@ -4,7 +4,7 @@
     [java-time.api :as jt]
     [compojure.core :refer [defroutes GET POST PUT DELETE]]
     [compojure.route :as route]
-    [ring.util.response :refer [resource-response response]]
+    [ring.util.response :refer [resource-response response file-response]]
     [ring.middleware.resource :refer [wrap-resource]]
     [ring.middleware.content-type :refer [wrap-content-type]]
     [ring.middleware.params :refer [wrap-params]]
@@ -17,14 +17,15 @@
     [sale-adviser-clojure.decoder.uuid :as id-decoder]
     [sale-adviser-clojure.decoder.sale :as decode-sale]
     [sale-adviser-clojure.decoder.datetime :as decode-date]
-    [sale-adviser-clojure.calculator :as calculator])
+    [sale-adviser-clojure.calculator :as calculator]
+    [sale-adviser-clojure.group-prediction-file :as group-prediction-file])
   (:import
     (clojure.lang ExceptionInfo)
     (java.io FileReader BufferedReader)))
 
 (defn upload-file
   [file]
-  (with-open [reader (io/reader (file :tempfile))]
+  (with-open [reader (io/reader (:tempfile file))]
     (doall (filter #(not (nil? %)) (map sale/insert-sale (decode-sale/from-csv reader))))))
 
 (defn get-index
@@ -84,9 +85,14 @@
            (GET "/dictionary/group/:group-id/product/:product-id/custom-value" [group-id product-id] (response (product-group/get-custom-value (id-decoder/from-string group-id) (id-decoder/from-string product-id))))
            (PUT "/dictionary/group/:group-id/product/:product-id/custom-value" [group-id product-id :as {body :body}] (response (product-group/update-custom-value (id-decoder/from-string group-id) (id-decoder/from-string product-id) body)))
 
+           ;;routes for download file with group prediction
+           (GET "/dictionary/group/:group-id/prediction-file/:prediction-date" [group-id prediction-date] (assoc-in (file-response (.getPath (group-prediction-file/get-file (id-decoder/from-string group-id) (decode-date/from-string prediction-date (jt/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))))) [:headers "Content-Type"] "text/csv"))
+
            ;;the last route if other didn't match
            (route/not-found (get-index))
            )
+
+;;(assoc-in (file-response (.getPath (group-prediction-file/get-file (id-decoder/from-string "9f38fd10-3426-4331-b333-f74b76f06dfb") (decode-date/from-string "2024-02-21T00:00:00.000Z" (jt/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))))) [:headers :mime-types] "text/csv")
 
 (defn wrap-exception-handling
   [handler]
