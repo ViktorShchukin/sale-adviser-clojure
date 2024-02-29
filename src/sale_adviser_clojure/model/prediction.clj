@@ -6,7 +6,7 @@
 (defrecord Prediction
   [^UUID product-id
    ^Float value
-   ^Float range])
+   ^String range])
 
 ;(def test-prediction {:productId 1
 ;                      :value 4

@@ -3,7 +3,8 @@
     [next.jdbc :as jdbc]
     [next.jdbc.result-set :as rs]
     [java-time.api :as jt]
-    [sale-adviser-clojure.decoder.sale :as decode-sale]))
+    [sale-adviser-clojure.decoder.sale :as decode-sale]
+    [sale-adviser-clojure.decoder.datetime :as decode-date]))
 
 
 ;;todo create a new namespace which will handle the db access. files like "sale" or "product" should handle the model of app
@@ -72,3 +73,21 @@
   (let [stm "delete from sale where id=?"
         uuid (parse-uuid id)]
     (jdbc/execute! ds-opts [stm uuid])))
+
+(defn convert
+  [hm]
+  {:product-id (:product-id hm)
+   :quantity (:quantity hm)
+   :sale-date (decode-date/from-java.util.Date (:date-t hm))})
+
+(defn get-all-sale-by-product-id-grouped-and-ordered-by-date
+  [product-id]
+  (let [stm "select ? AS product_id, sd.quantity, sd.date_t from
+                (select sum(quantity) as quantity , date_trunc('month',  sale_date) as date_t
+                      from sale s
+                      where product_id = ?
+                      group by date_t
+                      order by date_t) sd "
+        ;product_uuid (parse-uuid productId)
+        ]
+    (map convert (jdbc/execute! ds-opts [stm product-id product-id]))))

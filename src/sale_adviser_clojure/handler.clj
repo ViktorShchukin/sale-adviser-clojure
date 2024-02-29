@@ -66,6 +66,7 @@
            ;range - It's count of mounts in which period we need to do prediction
            (GET "/dictionary/product/:productId/prediction/:date" [productId date] (response (calculator/get-prediction (id-decoder/from-string productId) (decode-date/from-string date (jt/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")))))
 
+
            ;;routes to manage the product groups
            (GET "/dictionary/group" [] (response (product-group/get-all-groups-of-product)))
            (GET "/dictionary/group/:group-id" [group-id] (response (product-group/get-group-of-product-by-id (id-decoder/from-string group-id))))
@@ -93,6 +94,8 @@
            )
 
 ;;(assoc-in (file-response (.getPath (group-prediction-file/get-file (id-decoder/from-string "9f38fd10-3426-4331-b333-f74b76f06dfb") (decode-date/from-string "2024-02-21T00:00:00.000Z" (jt/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))))) [:headers :mime-types] "text/csv")
+;;(response (calculator/get-prediction (id-decoder/from-string "30e1c759-8d5b-490a-8b3d-e09cb2782fd6") (decode-date/from-string "2024-02-28T15:56:04.000Z" (jt/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")) (decode-date/from-string "2024-03-28T15:56:04.000Z" (jt/formatter "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))))
+
 
 (defn wrap-exception-handling
   [handler]
@@ -101,12 +104,10 @@
       (handler request)
       ;;todo handel clojure.lang.ExceptionInfo
       (catch ExceptionInfo e
-        (case ((ex-data e) :type)
-          :cannotCast ))
-      (catch ExceptionInfo e
-        {:status 400 :body (str "Invalid data: " (.getMessage e))})
+        {:status 500 :body (str "ExceptionInfo: " (.getMessage e))})
       (catch Exception e
         {:status 500 :body (.getMessage e)}))))
+
 
 (def app
   (-> app-routes
